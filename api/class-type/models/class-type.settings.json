@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "class_types",
+  "info": {
+    "name": "Class Type"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "class_type": {
+      "type": "string"
+    }
+  }
+}

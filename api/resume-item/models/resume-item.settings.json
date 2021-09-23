@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resume_items",
+  "info": {
+    "name": "Resume Item"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "item": {
+      "type": "string"
+    },
+    "resume_item": {
+      "via": "resume_item",
+      "model": "captain"
+    }
+  }
+}

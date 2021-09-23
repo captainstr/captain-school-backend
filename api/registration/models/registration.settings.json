@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "registrations",
+  "info": {
+    "name": "Registration",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "processed": {
+      "type": "boolean",
+      "default": false
+    },
+    "depositcheck": {
+      "type": "enumeration",
+      "enum": [
+        "NA",
+        "Deposit",
+        "Full"
+      ]
+    },
+    "transaction_id": {
+      "type": "string"
+    },
+    "class": {
+      "model": "class"
+    }
+  }
+}

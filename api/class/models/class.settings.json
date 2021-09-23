@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "classes",
+  "info": {
+    "name": "class",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "classroom_location": {
+      "type": "string"
+    },
+    "cost": {
+      "type": "decimal"
+    },
+    "date": {
+      "type": "date"
+    },
+    "deposit": {
+      "type": "decimal"
+    },
+    "details": {
+      "type": "richtext"
+    },
+    "location": {
+      "type": "string"
+    },
+    "other_information": {
+      "type": "richtext"
+    },
+    "money_date": {
+      "type": "date"
+    },
+    "information": {
+      "type": "richtext"
+    },
+    "state": {
+      "model": "state"
+    },
+    "city": {
+      "model": "city"
+    },
+    "captain": {
+      "model": "captain"
+    },
+    "class_type": {
+      "model": "class-type"
+    }
+  }
+}

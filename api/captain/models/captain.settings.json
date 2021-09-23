@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "captains",
+  "info": {
+    "name": "Captain",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullname": {
+      "type": "string"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "biography": {
+      "type": "text"
+    },
+    "exp_title": {
+      "type": "string"
+    },
+    "resume_item": {
+      "collection": "resume-item",
+      "via": "resume_item"
+    },
+    "slug": {
+      "type": "string"
+    }
+  }
+}
