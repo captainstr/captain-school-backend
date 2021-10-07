@@ -54,6 +54,9 @@
     },
     "class_type": {
       "model": "class-type"
+    },
+    "alternative_registration": {
+      "type": "boolean"
     }
   }
 }
