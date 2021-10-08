@@ -25,22 +25,41 @@ const gateway = new braintree.BraintreeGateway({
   privateKey: privateKey,
 });
 
-module.exports = {
-  async gettoken(ctx) {
-    const braintreeToken = gateway.clientToken.generate({});
-    return braintreeToken;
-  },
+async function gettoken(ctx) {
+  const braintreeToken = gateway.clientToken.generate({});
+  return braintreeToken;
+}
 
-  async payment(ctx) {
-    let nonceFromTheClient = ctx.request.body.paymentMethodNonce;
-    let amountFromTheClient = ctx.request.body.amount;
-    const newTransaction = await gateway.transaction.sale({
-      amount: amountFromTheClient,
-      paymentMethodNonce: nonceFromTheClient,
-      options: {
-        submitForSettlement: true,
-      },
+async function payment(ctx) {
+  let nonceFromTheClient = ctx.request.body.paymentMethodNonce;
+  let amountFromTheClient = ctx.request.body.amount;
+  const newTransaction = await gateway.transaction.sale({
+    amount: amountFromTheClient,
+    paymentMethodNonce: nonceFromTheClient,
+    options: {
+      submitForSettlement: true,
+    },
+  });
+  return newTransaction;
+}
+
+async function cashpayment(ctx) {
+  let depositcheck = ctx.request.body.depositcheck;
+  if (depositcheck === "NA") {
+    let response = await strapi.plugins["email"].services.email.send({
+      // TODO move to emails file and other relevant places
+      to: ctx.request.body.email,
+      bcc: "captaind@capquest.com, rossfowle@gmail.com",
+      subject: "Payment arrangement for 3Bs Captains School",
+      text: balanceDueBody,
+      html: 'You have elected to make payment arrangements without using a credit card. Contact Capt. Ross @ 910-547-3689 or <a href="mailto:rossfowle@gmail.com">email</a><center><strong>Be advised that registration is not confirmed until payment have been made.</strong></center>',
+      text: 'You have elected to make payment arrangements without using a credit card. Contact Capt. Ross @ 910-547-3689 or <a href="mailto:rossfowle@gmail.com">email</a>Be advised that registration is not confirmed until payment have been made.',
     });
-    return newTransaction;
-  },
+  }
+}
+
+module.exports = {
+  gettoken,
+  payment,
+  cashpayment,
 };
