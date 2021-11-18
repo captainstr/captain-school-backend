@@ -1,6 +1,6 @@
 //Captain's School
 
-module.exports = ({ env }) => ({
+/*module.exports = ({ env }) => ({
   email: {
     provider: "smtp",
     providerOptions: {
@@ -19,4 +19,4 @@ module.exports = ({ env }) => ({
       defaultReplyTo: "",
     },
   },
-});
+});*/

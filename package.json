@@ -13,7 +13,7 @@
   "dependencies": {
     "braintree": "^3.7.0",
     "knex": "0.21.18",
-    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3-rc.0",
     "sendmail": "^1.6.1",
     "sqlite3": "5.0.0",
     "strapi": "3.6.8",
