@@ -2,10 +2,10 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/reports",
+      "path": "/",
       "handler": "reports.index",
       "config": {
-        "policies": ["admin::hasPermissions"]
+        "policies": []
       }
     }
   ]
