@@ -9,11 +9,13 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
     "braintree": "^3.7.0",
     "knex": "0.21.18",
     "mysql2": "^2.3.3-rc.0",
+    "react-bootstrap-table-next": "^4.0.3",
+    "react-csv": "^2.0.3",
+    "react-dropdown-select": "^4.8.0",
     "sendmail": "^1.6.1",
     "sqlite3": "5.0.0",
     "strapi": "3.6.8",
