@@ -2,7 +2,7 @@ module.exports = ({ env }) => ({
   email: {
     provider: "smtp",
     providerOptions: {
-      host: "smtp.gmail.com", //SMTP Host
+      host: "mail-mw2nam080138.inbound.protection.outlook.com", //SMTP Host
       port: 465, //SMTP Port
       secure: true,
       username: env("EMAIL_USERNAME", ""),
