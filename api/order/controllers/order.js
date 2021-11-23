@@ -58,8 +58,61 @@ async function cashpayment(ctx) {
   }
 }
 
+async function deleteItem(ctx) {
+  const knex = strapi.connections.default;
+  console.log(ctx.query);
+  console.log(ctx.request.body.rows);
+  const rows = await knex("registrations")
+    .whereIn("id", ctx.request.body.rows)
+    .delete("*");
+  ctx.body = "Rows deleted";
+}
+
+async function processRegistration(ctx) {
+  const knex = strapi.connections.default;
+  const rows = await knex("registrations")
+    .whereIn("id", ctx.request.body.rows)
+    .update("processed", 1);
+  ctx.body = "Rows updated";
+}
+
+async function unprocessRegistration(ctx) {
+  const knex = strapi.connections.default;
+  const rows = await knex("registrations")
+    .whereIn("id", ctx.request.body.rows)
+    .update("processed", 0);
+  ctx.body = "Rows updated";
+}
+
+async function reports(ctx) {
+  const knex = strapi.connections.default;
+  console.log(ctx.query);
+  const rows = await knex("registrations")
+    .join("classes", "registrations.class", "classes.id")
+    .where((qb) => {
+      for (const [key, value] of Object.entries(ctx.query)) {
+        if (value !== "") {
+          qb.where({ [key]: value });
+        }
+      }
+    })
+    .select("*")
+    .options({ nestTables: true });
+
+  console.log(rows);
+
+  let mappedReports = rows.map((reportItem) => {
+    return reportItem;
+  });
+  ctx.body = mappedReports;
+}
+
 module.exports = {
   gettoken,
   payment,
   cashpayment,
+  reports,
+  deleteItem,
+  processRegistration,
+  unprocessRegistration,
 };

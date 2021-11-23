@@ -10,6 +10,38 @@
     },
     {
       "method": "GET",
+      "path": "/orders/reports/",
+      "handler": "order.reports",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/orders/deleteitem/",
+      "handler": "order.deleteItem",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/orders/processregistration/",
+      "handler": "order.processRegistration",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/orders/unprocessregistration/",
+      "handler": "order.unprocessRegistration",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/orders/count",
       "handler": "order.count",
       "config": {
