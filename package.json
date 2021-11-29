@@ -13,6 +13,7 @@
     "braintree": "^3.7.0",
     "knex": "0.21.18",
     "mysql2": "^2.3.3-rc.0",
+    "net": "^1.0.2",
     "react-bootstrap-table-next": "^4.0.3",
     "react-csv": "^2.0.3",
     "react-dropdown-select": "^4.8.0",
@@ -29,7 +30,8 @@
     "strapi-plugin-users-permissions": "3.6.8",
     "strapi-provider-email-smtp": "^1.0.3",
     "strapi-utils": "3.6.8",
-    "string-format": "^2.0.0"
+    "string-format": "^2.0.0",
+    "tls": "0.0.1"
   },
   "author": {
     "name": "A Strapi developer"
