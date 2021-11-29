@@ -14,7 +14,7 @@ const config = {
 };
 
 const registrationQuery = `SELECT registration.registration_id AS id, registration.anon_mail AS email, from_unixtime(registration.created,"%Y-%m-%d %H:%i:%s") AS created_at, from_unixtime(registration.updated,"%Y-%m-%d %H:%i:%s") AS updated_at, from_unixtime(registration.created,"%Y-%m-%d %H:%i:%s") AS published_at, first_name.field_first_name_value AS firstname, last_name.field_last_name_value AS lastname, phone.field_phone_value AS phone_number, 
-CONCAT(address.field_address_thoroughfare, address.field_address_premise, " ", address.field_address_locality, ", ", address.field_address_administrative_area, " ", address.field_address_postal_code, " ") AS address, processed.field_processed_value AS processed, depositcheck.field_depositcheck_value AS depositcheck, transaction_id.field_transaction_id_value AS transaction_id
+CONCAT(address.field_address_thoroughfare, address.field_address_premise, " ", address.field_address_locality, ", ", address.field_address_administrative_area, " ", address.field_address_postal_code, " ") AS address, processed.field_processed_value AS processed, depositcheck.field_depositcheck_value AS depositcheck, transaction_id.field_transaction_id_value AS transaction_id, registration.entity_id AS class
 FROM 
 registration registration
 LEFT JOIN node node_registration ON registration.entity_id = node_registration.nid AND (registration.entity_type = 'node')

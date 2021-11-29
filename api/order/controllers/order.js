@@ -99,7 +99,7 @@ async function reports(ctx) {
     })
     .select("*")
     .options({ nestTables: true });
-
+  console.log("rows");
   console.log(rows);
 
   let mappedReports = rows.map((reportItem) => {
