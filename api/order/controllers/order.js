@@ -1,7 +1,7 @@
 "use strict";
 const braintree = require("braintree");
 
-let environment_setting = process.env.int("BRAINTREE_ENV", "sandbox");
+let environment_setting = process.env.BRAINTREE_ENV;
 let merchantId;
 let publicKey;
 let privateKey;
