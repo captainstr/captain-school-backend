@@ -1,25 +1,29 @@
 "use strict";
 const braintree = require("braintree");
 
-let environment = "sandbox";
+let environment_setting = env.int("BRAINTREE_ENV", "sandbox");
 let merchantId;
 let publicKey;
 let privateKey;
+let environment;
 
-// TODO probably replace ALL variables with environmental variables here
-
-if (environment === "sandbox") {
-  merchantId = "dmq5c2znwzv59ns2";
-  publicKey = "g95tdf4wpkjztpx8";
-  privateKey = "03af29cf0c3195839607be151779ebdc";
-} else if (environment === "production") {
-  merchantId = "INSERT ENVIRONMENTAL VARIABLES";
-  publicKey = "INSERT ENVIRONMENTAL VARIABLES";
-  privateKey = "INSERT ENVIRONMENTAL VARIABLES";
+if (environment_setting === "sandbox") {
+  merchantId = env.int("SANDBOX_MERCHANT_ID", "dmq5c2znwzv59ns2");
+  publicKey = env.int("SANDBOX_PUBLIC_KEY", "g95tdf4wpkjztpx8");
+  privateKey = env.int(
+    "SANDBOX_PRIVATE_KEY",
+    "03af29cf0c3195839607be151779ebdc"
+  );
+  environment = braintree.Environment.Sandbox;
+} else if (environment_setting === "production") {
+  merchantId = env.int("PROD_MERCHANT_ID", "dmq5c2znwzv59ns2");
+  publicKey = env.int("PROD_PUBLIC_KEY", "g95tdf4wpkjztpx8");
+  privateKey = env.int("PROD_PRIVATE_KEY", "03af29cf0c3195839607be151779ebdc");
+  environment = braintree.Environment.Production;
 }
 
 const gateway = new braintree.BraintreeGateway({
-  environment: braintree.Environment.Sandbox,
+  environment: environment,
   merchantId: merchantId,
   publicKey: publicKey,
   privateKey: privateKey,
