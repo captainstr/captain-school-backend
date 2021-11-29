@@ -8,20 +8,14 @@ let privateKey;
 let environment;
 
 if (environment_setting === "sandbox") {
-  merchantId = process.env.int("SANDBOX_MERCHANT_ID", "dmq5c2znwzv59ns2");
-  publicKey = process.env.int("SANDBOX_PUBLIC_KEY", "g95tdf4wpkjztpx8");
-  privateKey = process.env.int(
-    "SANDBOX_PRIVATE_KEY",
-    "03af29cf0c3195839607be151779ebdc"
-  );
+  merchantId = process.env.SANDBOX_MERCHANT_ID;
+  publicKey = process.env.SANDBOX_PUBLIC_KEY;
+  privateKey = process.env.SANDBOX_PRIVATE_KEY;
   environment = braintree.Environment.Sandbox;
 } else if (environment_setting === "production") {
-  merchantId = process.env.int("PROD_MERCHANT_ID", "dmq5c2znwzv59ns2");
-  publicKey = process.env.int("PROD_PUBLIC_KEY", "g95tdf4wpkjztpx8");
-  privateKey = process.env.int(
-    "PROD_PRIVATE_KEY",
-    "03af29cf0c3195839607be151779ebdc"
-  );
+  merchantId = process.env.PROD_MERCHANT_ID;
+  publicKey = process.env.PROD_PUBLIC_KEY;
+  privateKey = process.env.PROD_PRIVATE_KEY;
   environment = braintree.Environment.Production;
 }
 
