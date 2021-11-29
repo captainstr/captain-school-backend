@@ -7,10 +7,10 @@
 const mysql = require("mysql2/promise");
 
 const config = {
-  host: env.int("OLD_DB_HOST", "127.0.0.1"),
-  user: env.int("OLD_DB_USERNAME", ""),
-  password: env.int("OLD_DB_PASSWORD", ""),
-  database: env.int("OLD_DB", ""),
+  host: process.env.int("OLD_DB_HOST", "127.0.0.1"),
+  user: process.env.int("OLD_DB_USERNAME", ""),
+  password: process.env.int("OLD_DB_PASSWORD", ""),
+  database: process.env.int("OLD_DB", ""),
 };
 
 const registrationQuery = `SELECT registration.registration_id AS id, registration.anon_mail AS email, from_unixtime(registration.created,"%Y-%m-%d %H:%i:%s") AS created_at, from_unixtime(registration.updated,"%Y-%m-%d %H:%i:%s") AS updated_at, from_unixtime(registration.created,"%Y-%m-%d %H:%i:%s") AS published_at, first_name.field_first_name_value AS firstname, last_name.field_last_name_value AS lastname, phone.field_phone_value AS phone_number, 

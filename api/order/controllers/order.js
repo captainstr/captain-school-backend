@@ -1,24 +1,27 @@
 "use strict";
 const braintree = require("braintree");
 
-let environment_setting = env.int("BRAINTREE_ENV", "sandbox");
+let environment_setting = process.env.int("BRAINTREE_ENV", "sandbox");
 let merchantId;
 let publicKey;
 let privateKey;
 let environment;
 
 if (environment_setting === "sandbox") {
-  merchantId = env.int("SANDBOX_MERCHANT_ID", "dmq5c2znwzv59ns2");
-  publicKey = env.int("SANDBOX_PUBLIC_KEY", "g95tdf4wpkjztpx8");
-  privateKey = env.int(
+  merchantId = process.env.int("SANDBOX_MERCHANT_ID", "dmq5c2znwzv59ns2");
+  publicKey = process.env.int("SANDBOX_PUBLIC_KEY", "g95tdf4wpkjztpx8");
+  privateKey = process.env.int(
     "SANDBOX_PRIVATE_KEY",
     "03af29cf0c3195839607be151779ebdc"
   );
   environment = braintree.Environment.Sandbox;
 } else if (environment_setting === "production") {
-  merchantId = env.int("PROD_MERCHANT_ID", "dmq5c2znwzv59ns2");
-  publicKey = env.int("PROD_PUBLIC_KEY", "g95tdf4wpkjztpx8");
-  privateKey = env.int("PROD_PRIVATE_KEY", "03af29cf0c3195839607be151779ebdc");
+  merchantId = process.env.int("PROD_MERCHANT_ID", "dmq5c2znwzv59ns2");
+  publicKey = process.env.int("PROD_PUBLIC_KEY", "g95tdf4wpkjztpx8");
+  privateKey = process.env.int(
+    "PROD_PRIVATE_KEY",
+    "03af29cf0c3195839607be151779ebdc"
+  );
   environment = braintree.Environment.Production;
 }
 

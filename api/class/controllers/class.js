@@ -8,10 +8,10 @@
 const mysql = require("mysql2/promise");
 
 const config = {
-  host: env.int("OLD_DB_HOST", "127.0.0.1"),
-  user: env.int("OLD_DB_USERNAME", ""),
-  password: env.int("OLD_DB_PASSWORD", ""),
-  database: env.int("OLD_DB", ""),
+  host: process.env.int("OLD_DB_HOST", "127.0.0.1"),
+  user: process.env.int("OLD_DB_USERNAME", ""),
+  password: process.env.int("OLD_DB_PASSWORD", ""),
+  database: process.env.int("OLD_DB", ""),
 };
 
 const classQuery = `SELECT node.title AS title, node.nid AS id, from_unixtime(node.created,"%Y-%m-%d %H:%i:%s") AS created_at, from_unixtime(node.changed,"%Y-%m-%d %H:%i:%s") AS updated_at, from_unixtime(node.created,"%Y-%m-%d %H:%i:%s") AS published_at, body.body_value AS details, captain.field_captain_tid AS captain, city.field_city_tid AS city, class_type.field_class_type_tid AS class_type, classroom_location.field_classroom_location_value AS classroom_location, cost.field_cost_value AS cost, date_format(datefield.field_date_value, '%Y-%m-%d') AS date, deposit.field_deposit_value AS deposit, info.field_info_value AS information, location.field_location_value AS location, date_format(money_date.field_money_date_value, '%Y-%m-%d') AS money_date, other_information.field_other_information_value AS other_information, state.field_state_tid AS state, alternate_registration.field_alternate_registration_value AS alternative_registration
