@@ -7,10 +7,10 @@ let publicKey;
 let privateKey;
 let environment;
 
-if (environment_setting === "sandbox") {
-  merchantId = process.env.SANDBOX_MERCHANT_ID;
-  publicKey = process.env.SANDBOX_PUBLIC_KEY;
-  privateKey = process.env.SANDBOX_PRIVATE_KEY;
+if (environment_setting !== "production") {
+  merchantId = "dmq5c2znwzv59ns2";
+  publicKey = "g95tdf4wpkjztpx8";
+  privateKey = "03af29cf0c3195839607be151779ebdc";
   environment = braintree.Environment.Sandbox;
 } else if (environment_setting === "production") {
   merchantId = process.env.PROD_MERCHANT_ID;
