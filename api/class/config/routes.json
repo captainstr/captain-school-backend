@@ -26,6 +26,14 @@
     },
     {
       "method": "POST",
+      "path": "/classes/data-import",
+      "handler": "class.classDataImport",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
       "path": "/classes",
       "handler": "class.create",
       "config": {

@@ -26,6 +26,14 @@
     },
     {
       "method": "POST",
+      "path": "/registrations/data-import",
+      "handler": "registration.regDataImport",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
       "path": "/registrations",
       "handler": "registration.create",
       "config": {
