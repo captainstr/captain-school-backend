@@ -41,8 +41,13 @@ module.exports = {
       let registrationRow = row.registrations;
       let classRow = row.classes;
       let classTypeRow = row.class_types;
-      let email = registrationRow.email;
-      email = "andy@codexr.io";
+      let email;
+      let environment_setting = process.env.BRAINTREE_ENV;
+      if (environment_setting !== "production") {
+        email = "andy@codexr.io";
+      } else if (environment_setting === "production") {
+        email = registrationRow.email;
+      }
       const formatObj = {
         firstname: registrationRow.firstname,
         lastname: registrationRow.lastname,
@@ -54,11 +59,12 @@ module.exports = {
       let balanceDueBody = format(balanceDue.balanceDueBody, formatObj);
       let response = await strapi.plugins["email"].services.email.send({
         to: email,
+        cc: "captaind@capquest.com",
         subject: balanceDueSubject,
         text: balanceDueBody,
         html: balanceDueBody,
       });
     });
   },
-  "1 * * * * *": async () => {},
+  //"1 * * * * *": async () => {},
 };
