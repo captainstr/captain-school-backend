@@ -43,6 +43,7 @@ module.exports = {
       let classRow = row.classes;
       let classTypeRow = row.class_types;
       let email = registrationRow.email;
+      email = "andy@codexr.io";
       const formatObj = {
         firstname: registrationRow.firstname,
         lastname: registrationRow.lastname,
@@ -52,13 +53,12 @@ module.exports = {
       };
       let balanceDueSubject = format(balanceDue.balanceDueSubject, formatObj);
       let balanceDueBody = format(balanceDue.balanceDueBody, formatObj);
-      /*let response = await strapi.plugins["email"].services.email.send({
+      let response = await strapi.plugins["email"].services.email.send({
         to: email,
         subject: balanceDueSubject,
         text: balanceDueBody,
         html: balanceDueBody,
       });
-*/
     });
   },
 };
