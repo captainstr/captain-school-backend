@@ -169,7 +169,7 @@ const HomePage = () => {
     }
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     getReports();
   }, []);
   return (
