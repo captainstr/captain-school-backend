@@ -22,7 +22,7 @@ module.exports = {
   // }
 
   // Runs every day at 10:00 am
-  "0 0 10 * * *": () => {
+  "0 0 10 * * *": async () => {
     const today = new Date(new Date().setUTCHours(0, 0, 0, 0));
 
     // important line - necessary for easy querying
