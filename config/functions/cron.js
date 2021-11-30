@@ -22,8 +22,7 @@ module.exports = {
   // }
 
   // Runs every day at 10:00 am
-  "0 0 10 * * *": () => {},
-  "1 * * * * *": async () => {
+  "0 0 10 * * *": () => {
     const today = new Date(new Date().setUTCHours(0, 0, 0, 0));
 
     // important line - necessary for easy querying
@@ -61,4 +60,5 @@ module.exports = {
       });
     });
   },
+  "1 * * * * *": async () => {},
 };
