@@ -11,6 +11,8 @@ import BootstrapTable from "react-bootstrap-table-next";
 import Select from "react-dropdown-select";
 import { InputGroup, Input, Button } from "reactstrap";
 import axios from "axios";
+// TODO there is a native way to do this with bootstrap table - look into it
+// TODO also has table search potentially
 import { CSVLink } from "react-csv/lib";
 
 const columns = [
@@ -242,17 +244,20 @@ const HomePage = () => {
         </div>
       </div>
       {reports.length === 0 ? null : (
-        <BootstrapTable
-          bootstrap4
-          striped
-          hover
-          keyField="id"
-          data={reports}
-          columns={columns}
-          selectRow={selectRow}
-          //defaultSorted={props.defaultSorted}
-          //rowEvents={rowEvents}
-        />
+        <div style={{ width: "50%" }}>
+          <BootstrapTable
+            bootstrap4
+            striped
+            hover
+            keyField="id"
+            data={reports}
+            columns={columns}
+            selectRow={selectRow}
+            classes="w-auto table table-fit"
+            //defaultSorted={props.defaultSorted}
+            //rowEvents={rowEvents}
+          />
+        </div>
       )}
     </div>
   );
