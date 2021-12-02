@@ -1,5 +1,7 @@
 "use strict";
+const format = require("string-format");
 const braintree = require("braintree");
+const emails = require("../../../data/emails.js");
 
 let environment_setting = process.env.BRAINTREE_ENV;
 let merchantId;
@@ -42,21 +44,6 @@ async function payment(ctx) {
     },
   });
   return newTransaction;
-}
-
-async function cashpayment(ctx) {
-  let depositcheck = ctx.request.body.depositcheck;
-  if (depositcheck === "NA") {
-    let response = await strapi.plugins["email"].services.email.send({
-      // TODO move to emails file and other relevant places
-      to: ctx.request.body.email,
-      bcc: "captaind@capquest.com, rossfowle@gmail.com",
-      subject: "Payment arrangement for 3Bs Captains School",
-      text: balanceDueBody,
-      html: 'You have elected to make payment arrangements without using a credit card. Contact Capt. Ross @ 910-547-3689 or <a href="mailto:rossfowle@gmail.com">email</a><center><strong>Be advised that registration is not confirmed until payment have been made.</strong></center>',
-      text: 'You have elected to make payment arrangements without using a credit card. Contact Capt. Ross @ 910-547-3689 or <a href="mailto:rossfowle@gmail.com">email</a>Be advised that registration is not confirmed until payment have been made.',
-    });
-  }
 }
 
 async function deleteItem(ctx) {
@@ -108,6 +95,82 @@ async function reports(ctx) {
   ctx.body = mappedReports;
 }
 
+// Emails for orders/registration
+
+async function cashpayment(ctx) {
+  let depositcheck = ctx.request.body.depositcheck;
+  console.log("deposit check");
+  console.log(ctx.request.body);
+  console.log(depositcheck);
+  if (depositcheck === "NA") {
+    let response = await strapi.plugins["email"].services.email.send({
+      to: "captaind@capquest.com, andrew.j.alexander@gmail.com",
+      //to: "andrew.j.alexander@gmail.com",
+      //to: ctx.request.body.email,
+      //cc: "captaind@capquest.com",
+      subject: emails.cashPaySubject,
+      html: emails.cashPayBodyHTML,
+      text: emails.cashPayBodyText,
+    });
+    console.log("email response");
+    console.log(response);
+  }
+}
+// TODO add functions in the form and here
+async function userregistrationinfo(ctx) {
+  const formatObj = {
+    date: ctx.request.body.date,
+    captain: ctx.request.body.captain,
+    classroom_location: ctx.request.body.classroom_location,
+    class_type: ctx.request.body.class_type,
+  };
+  let registrationSubject = format(emails.registrationSubject, formatObj);
+  let registrationBodyHTML = format(emails.registrationBodyHTML, formatObj);
+  let registrationBodyText = format(emails.registrationBodyText, formatObj);
+  await strapi.plugins["email"].services.email.send({
+    to: "captaind@capquest.com, andrew.j.alexander@gmail.com",
+    //to: ctx.request.body.email,
+    //bcc: "captaind@capquest.com, ross@captainsschool.com, rossfowle@gmail.com",
+    subject: registrationSubject,
+    html: registrationBodyHTML,
+    text: registrationBodyText,
+  });
+}
+
+async function adminregistrationinfo(ctx) {
+  const formatObj = {
+    title: ctx.request.body.title,
+    firstname: ctx.request.body.firstname,
+    lastname: ctx.request.body.lastname,
+    address: ctx.request.body.address,
+    phone_number: ctx.request.body.phone_number,
+    email: ctx.request.body.email,
+    cost: ctx.request.body.amount,
+    paid: ctx.request.body.deposit,
+    due: ctx.request.body.amount - ctx.request.body.deposit,
+  };
+  let balanceDueSubject = format(emails.balanceDueSubject, formatObj);
+  let balanceDueBodyHTML = format(emails.balanceDueBodyHTML, formatObj);
+  let balanceDueBodyText = format(emails.balanceDueBodyText, formatObj);
+  console.log(balanceDueSubject);
+  console.log(balanceDueBodyHTML);
+  console.log(balanceDueBodyText);
+  await strapi.plugins["email"].services.email.send({
+    //to: "andrew.j.alexander@gmail.com",
+    to: "captaind@capquest.com, andrew.j.alexander@gmail.com",
+    //cc: "rossfowle@gmail.com, ross@captainsschool.com ",
+    subject: balanceDueSubject,
+    html: balanceDueBodyHTML,
+    text: balanceDueBodyText,
+  });
+}
+
+async function initialregistration(ctx) {
+  adminregistrationinfo(ctx);
+  userregistrationinfo(ctx);
+  return "registration emails sent";
+}
+
 module.exports = {
   gettoken,
   payment,
@@ -116,4 +179,5 @@ module.exports = {
   deleteItem,
   processRegistration,
   unprocessRegistration,
+  initialregistration,
 };

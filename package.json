@@ -17,6 +17,7 @@
     "react-bootstrap-table-next": "^4.0.3",
     "react-csv": "^2.0.3",
     "react-dropdown-select": "^4.8.0",
+    "react-super-responsive-table": "^5.2.0",
     "sendmail": "^1.6.1",
     "sqlite3": "5.0.0",
     "strapi": "3.6.8",

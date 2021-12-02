@@ -103,6 +103,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/orders/initialregistration/",
+      "handler": "order.initialregistration",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
