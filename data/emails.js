@@ -1,47 +1,110 @@
 const balanceDueSubject = `{title} Registration {lastname}`;
-const balanceDueBodyHTML = `<div class="text-div">
+const balanceDueBodyHTML = `<div>
 <label>Class</label>
-<span class="text">{title}</span>
+</div>
 
+<div>
+<span>{title}</span>
+</div>
+
+<br />
+
+<div>
 <label>Name</label>
+</div>
+<div>
 <span class="text">{firstname} {lastname}</span>
 </div>
 
+<br />
+
+<div>
 <label>Registration Date</label>
+</div>
+<div>
 <span class="text">{created}</span>
+</div>
 
+<br />
+
+<div>
 <label>Address</label>
+</div>
+<div>
 <span class="text">{address}</span>
+</div>
 
+<br />
+
+<div>
 <label>Phone</label>
+</div>
+<div>
 <span class="text">{phone_number}</span>
+</div>
 
+<br />
+
+<div>
 <label>Email</label>
+</div>
+<div>
 <span class="text">{email}</span>
+</div>
 
+<br />
+
+<div>
 <label>Tuition</label>
+</div>
+<div>
 <span class="text">{cost}</span>
+</div>
 
+<br />
+
+<div>
 <label>Amount Paid</label>
+</div>
+<div>
 <span class="text">{paid}</span>
+</div>
 
+<br />
+
+<div>
 <label>Balance Due</label>
+</div>
+<div>
 <span class="text">{due}</span>
 </div>
+
+<br />
 
 {firstname}, {lastname}, {created}, {address}, {phone_number}, {email}, {title}, {cost}, {paid}, {due}`;
 
 const balanceDueBodyText = `{firstname}	First Name	Field "field_first_name".
+
 {lastname}	Last Name	Field "field_last_name".
+
 {created} Registration Date
+
 {address}	Address	Field "field_address".
+
 {phone_number}	Phone	Field "field_phone".
+
 {firstname}	First Name	Text field.
+
 {lastname}	Last Name	Text field.
+
 {address}	Address	Postal address field.
+
 {phone_number}	Phone	Telephone number field.
+
 {cost} Tuition      Tuition owed
+
 {paid} Amount      Amount Paid
+
 {due} Balance      Balance Due
 
 test, {firstname}, {lastname}, {created}, {phone_number}, {email}, {title}, {cost}, {paid}, {due}`;
