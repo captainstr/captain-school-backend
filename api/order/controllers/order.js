@@ -138,7 +138,7 @@ async function userregistrationinfo(ctx) {
 }
 
 async function adminregistrationinfo(ctx) {
-  const today = new Date(new Date().setUTCHours(0, 0, 0, 0));
+  const today = new Date().toDateString();
   const formatObj = {
     title: ctx.request.body.title,
     created: today,
