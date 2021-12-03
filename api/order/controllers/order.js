@@ -138,8 +138,10 @@ async function userregistrationinfo(ctx) {
 }
 
 async function adminregistrationinfo(ctx) {
+  const today = new Date(new Date().setUTCHours(0, 0, 0, 0));
   const formatObj = {
     title: ctx.request.body.title,
+    created: today,
     firstname: ctx.request.body.firstname,
     lastname: ctx.request.body.lastname,
     address: ctx.request.body.address,
@@ -152,9 +154,6 @@ async function adminregistrationinfo(ctx) {
   let balanceDueSubject = format(emails.balanceDueSubject, formatObj);
   let balanceDueBodyHTML = format(emails.balanceDueBodyHTML, formatObj);
   let balanceDueBodyText = format(emails.balanceDueBodyText, formatObj);
-  console.log(balanceDueSubject);
-  console.log(balanceDueBodyHTML);
-  console.log(balanceDueBodyText);
   await strapi.plugins["email"].services.email.send({
     //to: "andrew.j.alexander@gmail.com",
     to: "captaind@capquest.com, andrew.j.alexander@gmail.com",
