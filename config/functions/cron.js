@@ -27,7 +27,6 @@ async function balancepayment(ctx) {
     .select("*")
     .options({ nestTables: true });
 
-  const knex = strapi.connections.default;
   const emails = await knex("emails")
     .where({
       label: "Balance Payment",
