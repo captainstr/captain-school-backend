@@ -1,7 +1,6 @@
 "use strict";
 const format = require("string-format");
 const braintree = require("braintree");
-const emails = require("../../../data/emails.js");
 
 let environment_setting = process.env.BRAINTREE_ENV;
 let merchantId;
@@ -99,34 +98,42 @@ async function reports(ctx) {
 
 async function cashpayment(ctx) {
   let depositcheck = ctx.request.body.depositcheck;
-  console.log("deposit check");
-  console.log(ctx.request.body);
-  console.log(depositcheck);
+  const knex = strapi.connections.default;
+  const emails = await knex("emails")
+    .where({
+      label: "Cash Pay",
+    })
+    .first();
   if (depositcheck === "NA") {
     let response = await strapi.plugins["email"].services.email.send({
       to: "captaind@capquest.com, andrew.j.alexander@gmail.com",
       //to: "andrew.j.alexander@gmail.com",
       //to: ctx.request.body.email,
       //cc: "captaind@capquest.com",
-      subject: emails.cashPaySubject,
-      html: emails.cashPayBodyHTML,
-      text: emails.cashPayBodyText,
+      subject: emails.Subject,
+      html: emails.HTML,
+      text: emails.Text,
     });
-    console.log("email response");
-    console.log(response);
   }
 }
 // TODO add functions in the form and here
 async function userregistrationinfo(ctx) {
+  const knex = strapi.connections.default;
+  const emails = await knex("emails")
+    .where({
+      label: "Registration",
+    })
+    .first();
+
   const formatObj = {
     date: ctx.request.body.date,
     captain: ctx.request.body.captain,
     classroom_location: ctx.request.body.classroom_location,
     class_type: ctx.request.body.class_type,
   };
-  let registrationSubject = format(emails.registrationSubject, formatObj);
-  let registrationBodyHTML = format(emails.registrationBodyHTML, formatObj);
-  let registrationBodyText = format(emails.registrationBodyText, formatObj);
+  let registrationSubject = format(emails.Subject, formatObj);
+  let registrationBodyHTML = format(emails.HTML, formatObj);
+  let registrationBodyText = format(emails.Text, formatObj);
   await strapi.plugins["email"].services.email.send({
     to: "captaind@capquest.com, andrew.j.alexander@gmail.com",
     //to: ctx.request.body.email,
@@ -151,9 +158,14 @@ async function adminregistrationinfo(ctx) {
     paid: ctx.request.body.deposit,
     due: ctx.request.body.amount - ctx.request.body.deposit,
   };
-  let balanceDueSubject = format(emails.balanceDueSubject, formatObj);
-  let balanceDueBodyHTML = format(emails.balanceDueBodyHTML, formatObj);
-  let balanceDueBodyText = format(emails.balanceDueBodyText, formatObj);
+  const emails = await knex("emails")
+    .where({
+      label: "Balance Due",
+    })
+    .first();
+  let balanceDueSubject = format(emails.Subject, formatObj);
+  let balanceDueBodyHTML = format(emails.HTML, formatObj);
+  let balanceDueBodyText = format(emails.Text, formatObj);
   await strapi.plugins["email"].services.email.send({
     //to: "andrew.j.alexander@gmail.com",
     to: "captaind@capquest.com, andrew.j.alexander@gmail.com",

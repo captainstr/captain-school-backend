@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "emails",
+  "info": {
+    "name": "Emails",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "HTML": {
+      "type": "richtext"
+    },
+    "Subject": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "Text": {
+      "type": "text"
+    }
+  }
+}

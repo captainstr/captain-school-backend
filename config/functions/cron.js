@@ -1,6 +1,5 @@
 "use strict";
 const format = require("string-format");
-const emails = require("../../data/emails.js");
 
 /**
  * Cron config that gives you an opportunity
@@ -28,6 +27,13 @@ async function balancepayment(ctx) {
     .select("*")
     .options({ nestTables: true });
 
+  const knex = strapi.connections.default;
+  const emails = await knex("emails")
+    .where({
+      label: "Balance Payment",
+    })
+    .first();
+
   rows.forEach(async (row) => {
     let registrationRow = row.registrations;
     let classRow = row.classes;
@@ -46,14 +52,14 @@ async function balancepayment(ctx) {
       title: classRow.title,
       classType: classTypeRow.class_type,
     };
-    let balanceDueSubject = format(emails.balancePaymentSubject, formatObj);
-    let balanceDueBody = format(emails.balancePaymentBody, formatObj);
+    let balancePaymentSubject = format(emails.Subject, formatObj);
+    let balancePaymentBody = format(emails.Text, formatObj);
     let response = await strapi.plugins["email"].services.email.send({
       to: email,
       cc: "captaind@capquest.com",
-      subject: balanceDueSubject,
-      text: balanceDueBody,
-      html: balanceDueBody,
+      subject: balancePaymentSubject,
+      text: balancePaymentBody,
+      html: balancePaymentBody,
     });
   });
 }
