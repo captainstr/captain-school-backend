@@ -44,9 +44,15 @@ async function balancepayment(ctx) {
     } else if (environment_setting === "production") {
       email = registrationRow.email;
     }
+    let firstname =
+      registrationRow.firstname[0].toUpperCase() +
+      registrationRow.firstname.substring(1);
+    let lastname =
+      registrationRow.lastname[0].toUpperCase() +
+      registrationRow.lastname.substring(1);
     const formatObj = {
-      firstname: registrationRow.firstname,
-      lastname: registrationRow.lastname,
+      firstname: firstname,
+      lastname: lastname,
       amount: classRow.cost - classRow.deposit,
       title: classRow.title,
       classType: classTypeRow.class_type,
