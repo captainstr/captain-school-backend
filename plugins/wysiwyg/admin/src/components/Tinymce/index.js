@@ -4,7 +4,7 @@ import { Editor } from "@tinymce/tinymce-react";
 const TinyEditor = ({ onChange, name, value }) => {
   return (
     <Editor
-      //apiKey="API KEY"
+      apiKey="7lmqdnk34bo0y9i1irpp0delm8p1zrlu95nsieewp3fnjr8x"
       value={value}
       tagName={name}
       onEditorChange={(editorContent) => {
