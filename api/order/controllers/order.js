@@ -145,6 +145,7 @@ async function userregistrationinfo(ctx) {
 }
 
 async function adminregistrationinfo(ctx) {
+  const knex = strapi.connections.default;
   const today = new Date().toDateString();
   const formatObj = {
     title: ctx.request.body.title,
