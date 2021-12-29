@@ -17,12 +17,6 @@ import { CSVLink } from "react-csv/lib";
 
 const columns = [
   {
-    dataField: "id",
-    text: "Registration ID",
-    sort: false,
-    style: { color: "#1487d4", cursor: "pointer" },
-  },
-  {
     dataField: "title",
     text: "Title",
     sort: true,
