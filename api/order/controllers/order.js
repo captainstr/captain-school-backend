@@ -157,6 +157,7 @@ async function adminregistrationinfo(ctx) {
     email: ctx.request.body.email,
     cost: ctx.request.body.amount,
     paid: ctx.request.body.deposit,
+    class_type: ctx.request.body.desposit,
     due: ctx.request.body.amount - ctx.request.body.deposit,
   };
   const emails = await knex("emails")
