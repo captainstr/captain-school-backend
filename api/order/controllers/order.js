@@ -157,12 +157,12 @@ async function adminregistrationinfo(ctx) {
     email: ctx.request.body.email,
     cost: ctx.request.body.amount,
     paid: ctx.request.body.deposit,
-    class_type: ctx.request.body.desposit,
-    due: ctx.request.body.amount - ctx.request.body.deposit,
+    class_type: ctx.request.body.class_type,
+    due: String(ctx.request.body.amount - ctx.request.body.deposit),
   };
   const emails = await knex("emails")
     .where({
-      label: "Balance Payment",
+      label: "Send Registration to 3Bs",
     })
     .first();
   let balanceDueSubject = format(emails.Subject, formatObj);
