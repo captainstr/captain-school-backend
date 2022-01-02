@@ -162,7 +162,7 @@ async function adminregistrationinfo(ctx) {
   };
   const emails = await knex("emails")
     .where({
-      label: "Balance Due",
+      label: "Balance Payment",
     })
     .first();
   let balanceDueSubject = format(emails.Subject, formatObj);
