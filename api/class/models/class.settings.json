@@ -57,6 +57,9 @@
     },
     "alternative_registration": {
       "type": "boolean"
+    },
+    "datetext": {
+      "type": "string"
     }
   }
 }
