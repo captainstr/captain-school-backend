@@ -14,6 +14,9 @@ import axios from "axios";
 // TODO there is a native way to do this with bootstrap table - look into it
 // TODO also has table search potentially
 import { CSVLink } from "react-csv/lib";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { DateRange } from "react-date-range";
 
 const columns = [
   {
@@ -87,6 +90,13 @@ const HomePage = () => {
   const [reports, setReports] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [currentOperation, setCurrentOperation] = useState(null);
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
 
   const onSelectAll = (isSelect, rows, e) => {
     if (isSelect) {
@@ -142,9 +152,22 @@ const HomePage = () => {
   }
 
   async function getReports() {
-    let reportObjs = await axios.get("/orders/reports/", { params: values });
+    let valuesAndDate = { ...values };
+    valuesAndDate["startDate"] = date[0].startDate;
+    valuesAndDate["endDate"] = date[0].endDate;
+    let reportObjs = await axios.get("/orders/reports/", {
+      params: valuesAndDate,
+    });
     let mappedReports = reportObjs.data.map((reportObj) => {
       let registrations = reportObj.registrations;
+      let created_at = new Date(
+        registrations["created_at"]
+      ).toLocaleDateString();
+      let updated_at = new Date(
+        registrations["updated_at"]
+      ).toLocaleDateString();
+      registrations["created_at"] = created_at;
+      registrations["updated_at"] = updated_at;
       registrations["title"] = reportObj.classes.title;
       return registrations;
     });
@@ -210,6 +233,12 @@ const HomePage = () => {
           />
         </InputGroup>
       </div>
+      <DateRange
+        editableDateInputs={true}
+        onChange={(item) => setDate([item.selection])}
+        moveRangeOnFirstSelection={false}
+        ranges={date}
+      />
       <div style={{ flex: 1 }}>
         <h3>Processed</h3>
         <Select
