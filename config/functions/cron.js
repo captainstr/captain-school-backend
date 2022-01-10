@@ -16,6 +16,7 @@ async function balancepayment(ctx) {
 
   // important line - necessary for easy querying
   const knex = strapi.connections.default;
+  const baseUrl = strapi.config.get("server.url");
 
   const rows = await knex("registrations")
     .join("classes", "registrations.class", "classes.id")
@@ -56,6 +57,7 @@ async function balancepayment(ctx) {
       amount: classRow.cost - classRow.deposit,
       title: classRow.title,
       classType: classTypeRow.class_type,
+      base_url: baseUrl,
     };
     let balancePaymentSubject = format(emails.Subject, formatObj);
     let balancePaymentBody = format(emails.Text, formatObj);

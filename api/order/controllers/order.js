@@ -123,12 +123,12 @@ async function userregistrationinfo(ctx) {
       label: "Registration",
     })
     .first();
-
   const formatObj = {
     date: ctx.request.body.date,
     captain: ctx.request.body.captain,
     classroom_location: ctx.request.body.classroom_location,
     class_type: ctx.request.body.class_type,
+    title: ctx.request.body.title,
   };
   let registrationSubject = format(emails.Subject, formatObj);
   let registrationBodyHTML = format(emails.HTML, formatObj);
