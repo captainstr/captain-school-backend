@@ -47,8 +47,6 @@ async function payment(ctx) {
 
 async function deleteItem(ctx) {
   const knex = strapi.connections.default;
-  console.log(ctx.query);
-  console.log(ctx.request.body.rows);
   const rows = await knex("registrations")
     .whereIn("id", ctx.request.body.rows)
     .delete("*");
@@ -73,20 +71,21 @@ async function unprocessRegistration(ctx) {
 
 async function reports(ctx) {
   const knex = strapi.connections.default;
-  console.log(ctx.query);
   const rows = await knex("registrations")
     .join("classes", "registrations.class", "classes.id")
     .where((qb) => {
       for (const [key, value] of Object.entries(ctx.query)) {
-        if (value !== "") {
+        if (key === "startDate") {
+          qb.where("registrations.created_at", ">=", value);
+        } else if (key === "endDate") {
+          qb.where("registrations.created_at", "<", value);
+        } else if (key !== "startDate" && key !== "endDate" && value !== "") {
           qb.where({ [key]: value });
         }
       }
     })
     .select("*")
     .options({ nestTables: true });
-  console.log("rows");
-  console.log(rows);
 
   let mappedReports = rows.map((reportItem) => {
     return reportItem;
