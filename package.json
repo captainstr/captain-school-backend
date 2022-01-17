@@ -7,6 +7,8 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
+    "dev-nobuild": "strapi develop --no-build",
+    "delete": "strapi build --clean",
     "strapi": "strapi"
   },
   "dependencies": {

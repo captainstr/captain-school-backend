@@ -65,6 +65,11 @@ const columns = [
     sort: true,
   },
   {
+    dataField: "deposit",
+    text: "Deposit",
+    sort: true,
+  },
+  {
     dataField: "processed",
     text: "Processed",
     sort: false,
@@ -169,6 +174,12 @@ const HomePage = () => {
       registrations["created_at"] = created_at;
       registrations["updated_at"] = updated_at;
       registrations["title"] = reportObj.classes.title;
+      if (
+        reportObj.classes.deposit !== null &&
+        registrations.depositcheck === "Deposit"
+      ) {
+        registrations["deposit"] = "$" + reportObj.classes.deposit;
+      }
       return registrations;
     });
     setReports(mappedReports);
