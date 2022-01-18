@@ -83,19 +83,11 @@ const operations = [
   { label: "Unprocess Registration", url: "unprocessregistration" },
 ];
 
-// TODO move into some utility file at some point maybe
-function addDate(dt, amount, dateType) {
-  switch (dateType) {
-    case "days":
-      return dt.setDate(dt.getDate() + amount) && dt;
-    case "weeks":
-      return dt.setDate(dt.getDate() + 7 * amount) && dt;
-    case "months":
-      return dt.setMonth(dt.getMonth() + amount) && dt;
-    case "years":
-      return dt.setFullYear(dt.getFullYear() + amount) && dt;
-  }
-}
+export const addressFormatter = (address1, address2, city, state, zip) => {
+  const address =
+    address1 + " " + address2 + " " + city + ", " + state + " " + zip;
+  return address;
+};
 
 const HomePage = () => {
   const [values, setValues] = useState({
@@ -179,6 +171,14 @@ const HomePage = () => {
     });
     let mappedReports = reportObjs.data.map((reportObj) => {
       let registrations = reportObj.registrations;
+      let address = addressFormatter(
+        registrations.address1,
+        registrations.address2,
+        registrations.city,
+        registrations.state,
+        registrations.zip
+      );
+      registrations["address"] = address;
       let created_at = new Date(
         registrations["created_at"]
       ).toLocaleDateString();
