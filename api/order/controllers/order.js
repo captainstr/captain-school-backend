@@ -87,6 +87,7 @@ async function reports(ctx) {
     .select("*")
     .options({ nestTables: true });
 
+  // TODO what is the point of this? Is this some sort of object normalization or something?
   let mappedReports = rows.map((reportItem) => {
     return reportItem;
   });
