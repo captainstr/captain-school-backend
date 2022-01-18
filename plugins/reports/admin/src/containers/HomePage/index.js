@@ -197,6 +197,21 @@ const HomePage = () => {
     }
   }
 
+  function processForCSV(selectedRows) {
+    const csvData = selectedRows.map((item) => {
+      delete item.class;
+      delete item.transaction_id;
+      delete item.updated_by;
+      delete item.created_by;
+      delete item.updated_at;
+      delete item.published_at;
+      delete item.processed;
+      delete item.braintree;
+      return item;
+    });
+    return csvData;
+  }
+
   useEffect(() => {
     getReports();
   }, []);
@@ -204,7 +219,7 @@ const HomePage = () => {
     <div>
       <h1>Reports</h1>
       <CSVLink
-        data={selectedRows}
+        data={processForCSV(selectedRows)}
         filename={"report-export.csv"}
         className="btn btn-primary"
         target="_blank"
