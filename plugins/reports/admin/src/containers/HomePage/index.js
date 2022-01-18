@@ -83,6 +83,20 @@ const operations = [
   { label: "Unprocess Registration", url: "unprocessregistration" },
 ];
 
+// TODO move into some utility file at some point maybe
+function addDate(dt, amount, dateType) {
+  switch (dateType) {
+    case "days":
+      return dt.setDate(dt.getDate() + amount) && dt;
+    case "weeks":
+      return dt.setDate(dt.getDate() + 7 * amount) && dt;
+    case "months":
+      return dt.setMonth(dt.getMonth() + amount) && dt;
+    case "years":
+      return dt.setFullYear(dt.getFullYear() + amount) && dt;
+  }
+}
+
 const HomePage = () => {
   const [values, setValues] = useState({
     title: "",
@@ -97,7 +111,7 @@ const HomePage = () => {
   const [currentOperation, setCurrentOperation] = useState(null);
   const [date, setDate] = useState([
     {
-      startDate: new Date(),
+      startDate: null,
       endDate: null,
       key: "selection",
     },
