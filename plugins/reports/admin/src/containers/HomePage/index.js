@@ -213,15 +213,23 @@ const HomePage = () => {
 
   function processForCSV(selectedRows) {
     const csvData = selectedRows.map((item) => {
-      delete item.class;
-      delete item.transaction_id;
-      delete item.updated_by;
-      delete item.created_by;
-      delete item.updated_at;
-      delete item.published_at;
-      delete item.processed;
-      delete item.braintree;
-      return item;
+      let newCSVDataItem = {
+        title: item.title,
+        lastname: item.lastname,
+        firstname: item.firstname,
+        email: item.email,
+        phone_number: item.phone_number,
+        depositcheck: item.depositcheck,
+        deposit: item.deposit,
+        transaction_id: item.transaction_id,
+        address1: item.address1,
+        address2: item.address2,
+        city: item.city,
+        zip: item.zip,
+        state: item.state,
+        created_at: item.created_at,
+      };
+      return newCSVDataItem;
     });
     return csvData;
   }
