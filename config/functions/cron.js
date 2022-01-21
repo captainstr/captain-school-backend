@@ -16,7 +16,7 @@ async function balancepayment(ctx) {
 
   // important line - necessary for easy querying
   const knex = strapi.connections.default;
-  const baseUrl = strapi.config.get("server.url");
+  const baseURL = strapi.config.get("server.url");
 
   const rows = await knex("registrations")
     .join("classes", "registrations.class", "classes.id")
@@ -57,7 +57,7 @@ async function balancepayment(ctx) {
       amount: classRow.cost - classRow.deposit,
       title: classRow.title,
       classType: classTypeRow.class_type,
-      base_url: baseUrl,
+      base_url: baseURL,
     };
     let balancePaymentSubject = format(emails.Subject, formatObj);
     let balancePaymentBody = format(emails.Text, formatObj);
@@ -72,18 +72,12 @@ async function balancepayment(ctx) {
 }
 
 module.exports = {
-  /**
-   * Simple example.
-   * Every monday at 1am.
-   */
-  // '0 1 * * 1': () => {
-  //
-  // }
-
   // Runs every day at 10:00 am
   "0 0 10 * * *": async () => {
     balancepayment();
   },
-  //"1 * * * * *": async () => {},
-  //"0 0 10 * * *": async () => {)
+  // Runs every 10 seconds
+  /*"0/10 * * * * *": async () => {
+    balancepayment();
+  },*/
 };
